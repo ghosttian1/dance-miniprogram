@@ -4,7 +4,7 @@ import constants from './utils/const'
 import wxNotificationCenter from './libs/WxNotificationCenter/WxNotificationCenter'
 // app.js
 
-App({
+App({ 
   onLaunch: function () {
     // 全局设置分享语
     this.overShare()
