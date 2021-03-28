@@ -1,0 +1,286 @@
+<wxs module="refresh">
+module.exports = {
+  onPulling: function(evt, instance) {
+    var p = Math.min(evt.detail.dy / 80, 1)
+    console.log(p)
+    var view = instance.selectComponent('.refresh-container')
+    view.setStyle({
+      opacity: p,
+      transform: "scale(" + p + ")"
+    })
+  }
+}
+</wxs>
+<!-- 头部 -->
+<view class="cu-custom" style="height:{{CustomBar}}px">
+  <view class="cu-bar fixed {{bgImage!=''?'none-bg text-black bg-img':''}} bg-white" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;{{bgImage?'background-image:url(' + bgImage+')':''}}" bindlongpress="showVersion">
+    <view class="action city">
+      <navigator open-type="navigate" hover-class='none' url="/pages/info/city/city" class="cu-item"> 
+        <button class="cu-btn  sm" role="button">{{cityInfo.city}}<text class="cuIcon-triangledownfill"></text></button>
+      </navigator>
+    </view>
+    <view class="content" style="top:{{StatusBar}}px">
+      <view>舞圈</view>
+    </view>
+  </view>
+</view>
+
+<view class="top-tab" >
+  <view class="tab-inner" style="top:{{CustomBar}}px">
+    <scroll-view scroll-x class="bg-white nav border-bottom dashed-bottom" scroll-with-animation scroll-left="{{scrollLeft}}">
+      <view class="flex text-center">
+        <view class="cu-item flex-sub {{item.value==TabCur?'text-green cur':''}}" wx:for="{{tabList}}" wx:key="value"  bindtap="tabSelect" data-id="{{index}}" data-value="{{item.value}}">
+        {{item.text}}
+        </view>
+      </view>
+    </scroll-view>
+    <!-- 条件-->
+    <!-- 找舞伴 -->
+    <view class="bg-white nav shai dashed-bottom"   wx:if="{{TabCur === 'dance' && pageConfig.commentPartner === 'true'}}">
+      <view class="flex text-center" >
+        <!-- 性别 -->
+        <picker 
+          class="cu-item flex-sub text-sm" 
+          bindchange="genderSelectChange" 
+          range="{{gender}}"
+          value="{{genderSelectedIndex}}"
+          range-key="text">
+          {{genderSelectedIndex === null ? '性别' : gender[genderSelectedIndex].text}}
+          <text class="cuIcon-unfold"> </text>
+        </picker>
+        <!-- 专业 -->
+        <picker 
+          class="cu-item flex-sub text-sm" 
+          bindchange="majorSelectChange" 
+          range="{{major}}"
+          value="{{majorSelectedIndex}}"
+          range-key="text">
+          {{ majorSelectedIndex === null ? '专业' : major[majorSelectedIndex].text}}
+          <text class="cuIcon-unfold"> </text>
+        </picker>
+        <!-- 水平 -->
+        <picker 
+          class="cu-item flex-sub text-sm" 
+          bindchange="levelSelectChange" 
+          range="{{level}}"
+          value="{{levelSelectedIndex}}"
+          range-key="text">
+          {{ levelSelectedIndex === null ? '水平' :level[levelSelectedIndex].text}}
+          <text class="cuIcon-unfold"> </text>
+        </picker>
+      </view>
+    </view>
+    <!-- 赛服转让 -->
+    <view class="bg-white nav shai dashed-bottom"   wx:elif="{{TabCur === 'clothes'  && pageConfig.commentTransfer === 'true'}}">
+      <view class="flex text-center" >
+          <picker 
+            class="cu-item flex-sub text-sm" 
+            bindchange="clothesSelectChange" 
+            value="{{clothesSelectedIndex}}"
+            range="{{clothesType}}"
+            range-key="text">
+            {{clothesType[clothesSelectedIndex].text}}
+            <text class="cuIcon-unfold"> </text>
+          </picker>
+      </view>
+    </view>
+    <!-- 找工作 -->
+    <view class="bg-white nav shai dashed-bottom"   wx:elif="{{TabCur === 'work'  && pageConfig.commentRecruit === 'true'}}">
+      <view class="flex text-center" >
+          <picker 
+            class="cu-item flex-sub text-sm" 
+            bindchange="workSelectChange" 
+            range="{{workDirection}}"
+            value="{{workSelectedIndex}}"
+            range-key="text">
+            {{workDirection[workSelectedIndex].text}}
+            <text class="cuIcon-unfold"> </text>
+          </picker>
+      </view>
+    </view>
+  </view>
+</view>
+
+  <view wx:if="{{TabCur === 'dance'  && pageConfig.commentPartner === 'true'}}" class="wrapper" style="height:calc(100vh - 160rpx - 100rpx - {{CustomBar}}px  )">
+    <coolui-scroll
+		  scrollOption="{{danceScroll}}"
+      bindrefresh="refresh" 
+      bindloadMore="loadMore"
+      wx:if="{{danceList.length > 0}}"
+    >
+      <view class="list-inner" slot="inner">
+        <view class="" >
+            <navigator open-type="navigate" url="/pages/info/detail-dance/detail?id={{item.commentPartner.id}}" class="cu-card dynamic no-card" wx:for="{{danceList}}" wx:key="index">
+              <view class="cu-item shadow dashed-bottom" >
+                <view class="cu-list menu-avatar">
+                  <view class="cu-item">
+                    <view class="cu-avatar round lg" style="background-image:url({{item.userProfile.userinfo.avatar}});"></view>
+                    <view class="content flex-sub">
+                      <view>{{item.userProfile.userinfo.nickname}}</view>
+                    </view>
+                    <view class=" text-gray text-sm padding-right">
+                      {{item.commentPartner.training}}
+                    </view>
+                  </view>
+                </view>
+          
+                <view class="flex flex-wrap padding-left padding-right">
+                  <view class="padding-right-sm">
+                    <view class="cu-tag bg-red light round text-xs">{{item.commentPartner.genderText}}</view>
+                  </view>
+                  <view class="padding-right-sm" wx:if="{{item.commentPartner.age}}">
+                    <view class="cu-tag bg-red light round text-xs">{{item.commentPartner.age}}</view>
+                  </view>
+                  <view class="padding-right-sm">
+                    <view class="cu-tag bg-red light round text-xs">{{item.commentPartner.height}}cm</view>
+                  </view>
+                  <view class="padding-right-sm">
+                    <view class="cu-tag bg-red light round text-xs">{{item.commentPartner.levelText}}</view>
+                  </view>
+                  <view class="padding-right-sm">
+                    <view class="cu-tag bg-red light round text-xs">{{item.commentPartner.majorText}}</view>
+                  </view>
+                  <view class="padding-right-sm">
+                    <view class="cu-tag bg-red light round text-xs">{{item.commentPartner.danceAge}}年</view>
+                  </view>            
+                  <view class="padding-right-sm">
+                    <view class="cu-tag bg-red light round text-xs">{{item.commentPartner.cityText}}</view>
+                  </view>
+                </view>
+                <view class="text-content margin-top-sm">
+                  {{item.commentPartner.comment}}
+                </view>
+              </view>
+            </navigator>
+        </view>
+      </view>
+    </coolui-scroll>
+    <view class="no-data text-gray" wx:else>
+        暂时没有内容哦
+    </view>
+  </view>
+
+  <view wx:elif="{{TabCur === 'clothes'  && pageConfig.commentTransfer === 'true'}}" style="height:calc(100vh - 160rpx - 100rpx - {{CustomBar}}px  )">
+    <coolui-scroll
+      scrollOption="{{clothesScroll}}" 
+      bindrefresh="refresh" 
+      bindloadMore="loadMore"
+      wx:if="{{clothesList.length > 0}}"
+    >
+    <view class="list-inner" slot="inner">
+      <view class="" >
+          <view class="list grid col-2 padding-lr-sm bg-white">
+            <view class="padding-lr-xs padding-bottom radius " wx:for="{{clothesList}}" wx:key="index">
+              <navigator open-type="navigate" url="/pages/info/detail-dress/dress?id={{item.commentTransfer.id}}">
+                <view class="solid" >
+                    <image src="{{item.assetsList[0].resourceUrl}}" mode="aspectFill" style="vertical-align:bottom"></image>
+                    <view class="padding-lr-xs padding-bottom-xs" >
+                        <view class="text-content  text2-cut padding-top-xs">
+                          {{item.commentTransfer.title}}
+                        </view>
+                        <view class="padding-tb-xs solid-bottom " >
+                          <text class="text-price text-red">{{item.commentTransfer.price / 100}}</text>
+                        </view>
+                        <view class="margin-top-xs">
+                          <view class="cu-avatar round sm margin-right-xs" style="background-image:url({{item.userProfile.userinfo.avatar}});"></view>
+                          <text>{{item.userProfile.userinfo.nickname}}</text>
+                        </view>
+                    </view>
+                </view>
+              </navigator>
+            </view>
+          </view>
+      </view>
+      </view>
+    </coolui-scroll>
+    <view class="no-data text-gray" wx:else>
+        暂时没有内容哦
+    </view>
+  </view>
+
+  <view wx:elif="{{TabCur === 'work'  && pageConfig.commentRecruit === 'true'}}" style="height:calc(100vh - 160rpx - 100rpx - {{CustomBar}}px)">
+    <coolui-scroll
+      scrollOption="{{workScroll}}" 
+      bindrefresh="refresh" 
+      bindloadMore="loadMore"
+      wx:if="{{workList.length > 0}}"
+    >
+      <view class="list-inner" slot="inner">
+        <view class="" >
+            <navigator open-type="navigate" url="/pages/info/detail-work/work?id={{item.commentRecruit.id}}" class="cu-card dynamic no-card" wx:for="{{workList}}" wx:key="index" >
+              <view class="cu-item shadow dashed-bottom" >
+                <view class="cu-list menu-avatar">
+                  <view class="cu-item">
+                    <view class="cu-avatar round lg" style="background-image:url({{item.userProfile.userinfo.avatar}});"></view>
+                    <view class="content flex-sub">
+                      <view>{{item.userProfile.userinfo.nickname}}</view>
+                    </view>
+                  </view>
+                </view>
+                
+                <view class="flex padding-lr justify-between margin-bottom-sm">
+                  <view class="flex-sub">
+                    {{item.commentRecruit.directionText}}老师
+                  </view>
+                  <view class="text-gray" >
+                    {{item.commentRecruit.salary}}<text wx:if="{{item.commentRecruit.directionId === 1045}}">元</text>
+                  </view>
+                </view>
+          
+                <view class="text-content">
+                  <text class="text-gray"><text class="cuIcon-locationfill text-orange"></text>{{item.commentRecruit.address}}</text>
+                </view>
+                <view class="text-content">
+                  <text class="text-black">{{item.commentRecruit.comment}}</text>
+                </view>
+              </view>
+            </navigator>
+        </view>
+      </view>
+      </coolui-scroll>
+      <view class="no-data text-gray" wx:else>
+          暂时没有内容哦
+      </view>
+  </view>
+
+
+
+<!--发布-->
+<view class="publish">
+  <text class="cuIcon-roundaddfill lg text-green " bindtap="openModal"></text>
+</view>
+<view class="cu-modal bottom-modal {{ publishModalShow ? 'show' :''}}">
+  <view class="pu-main" >
+    <view class="flex">
+      <view class="flex-sub" wx:if="{{pageConfig.commentPartner === 'true'}}">
+        <view class="pu-item {{limit.partner === 30 ? 'disabled' : ''}}" bindtap="goToPublish"  data-url="/pages/info/edit-dance/index" data-id="partner">
+          <image class="" src="../../../images/pu-dance.png" mode="heightFix"></image>
+          <view class="" >
+            找舞伴  
+          </view>
+        </view>
+      </view>
+      <view class="flex-sub" wx:if="{{pageConfig.commentTransfer === 'true'}}">
+        <view class="pu-item {{limit.transfer === 30 ? 'disabled' : ''}}" bindtap="goToPublish" data-url="/pages/info/edit-dress/index" data-id="transfer">
+          <image class="" src="../../../images/pu-zhuan.png" mode="heightFix"></image>
+          <view class="" >
+            赛服转让
+          </view>
+        </view>
+      </view>
+      <view class="flex-sub" wx:if="{{pageConfig.commentRecruit === 'true'}}">
+        <view class="pu-item {{limit.recruit === 30 ? 'disabled' : ''}}" bindtap="goToPublish" data-url="/pages/info/edit-work/index" data-id="recruit">
+          <image class="" src="../../../images/pu-work.png" mode="heightFix"></image>
+          <view class="" >
+            发布工作
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="pu-close" >
+        <text class="cuIcon-close lg text-green pu-close" bindtap="closeModal"></text>
+    </view>
+  </view>
+</view>
+<!--底部占位符 --> 
+<view class='cu-tabbar-height'></view>

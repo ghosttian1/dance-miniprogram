@@ -1,0 +1,30 @@
+<!--pages/login/login.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="content">登录</view>
+</cu-custom>
+
+<!-- 手机号授权 -->
+<view wx:if="!userInfo" class="text-center" style="margin-top:30vh">
+	<view class="text-gray">
+		登录后查看更多信息哦~
+	</view>
+	 <button style="width:60%;margin:100rpx auto;" class="cu-btn block margin-lg lg bg-green" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">去登录</button>
+</view>
+
+<!-- 个人资料授权 -->
+<view class="cu-modal {{ authShow ?'show':''}}">
+  <view class="cu-dialog">
+	<view class="cu-bar bg-white justify-end">
+		<view class="content">获取信息</view>
+		<view class="action" bindtap="hideModal">
+			<text class="cuIcon-close text-red"></text>
+		</view>
+	</view>
+    <view class="padding-xl">
+	  授权用户信息，可以获取更好的体验哦~
+    </view>
+    <view class="cu-bar bg-white">
+	  <button style="width:100%;"  class="cu-btn block margin-lg lg bg-green" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授 权</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,93 @@
+/* pages/dance/detail/index.wxss */
+.video-swiper{width:100%;height:100%}
+.video_item{height:100%;width:100%}
+.play-btn{
+  width: 160rpx;
+  height: 160rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 50%;
+  font-size: 160rpx;
+}
+.video-swiper {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+.container {
+    width: 100%;
+    height: calc(100vh - 120rpx  - env(safe-area-inset-bottom) / 2);
+    /* height: calc(100vh - 120rpx); */
+    position: relative;
+    background: #000;
+}
+
+/* icon */
+.cuIcon-weixin{
+    font-size: 80rpx;
+    /* color:#20c064; */
+    color:#40b34f;
+}
+.cuIcon-likefill{
+    font-size: 70rpx;
+}
+
+/* 头像内容 */
+.box{
+    position: absolute;
+    left: 20rpx;
+    bottom: 100rpx;
+    width: 70vw;
+    color: #fff;
+    z-index: 100;
+}
+.box .cu-avatar{
+    display: inline-block;
+    width: 80rpx;
+    height: 80rpx;
+}
+.box .nickname{
+    display: inline-block;
+    font-size: 30rpx;
+    max-width: 230rpx;
+    overflow: hidden;
+    max-height: 1.6em;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+.box .content{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    max-height: 3.2em;
+    overflow: hidden;
+    font-size: 30rpx;
+}
+
+/* 右侧按钮和分享等 */
+.btn-box{
+    z-index: 100;
+    position: absolute;
+    right: 20rpx;
+    bottom: 100rpx;
+    color: #fff;
+}
+.btn-box .btn{
+    width: 100rpx;
+    margin-top: 60rpx;
+    display: inline-block;
+    position: relative;
+}
+
+.share-btn{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}

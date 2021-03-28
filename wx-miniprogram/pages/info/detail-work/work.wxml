@@ -1,0 +1,56 @@
+<!-- 头部 -->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+    <view slot="content">工作详情</view>
+</cu-custom>
+ <view class="cu-item  bg-white">
+    <view class="cu-list menu-avatar">
+        <view class="cu-item">
+            <navigator class="cu-avatar round lg" open-type="switchTab" url="/pages/profile/myhome/myhome" wx:if="{{userInfo.isSelf}}">
+            <view class="cu-avatar round lg"  style="background-image:url({{userInfo.avatar}});"></view>
+        </navigator>
+        <navigator class="cu-avatar round lg" url="/pages/profile/userhome/userhome?targetUserId={{userInfo.userId}}" wx:else>
+            <view class="cu-avatar round lg"  style="background-image:url({{userInfo.avatar}});"></view>
+        </navigator>
+            <view class="content flex-sub">
+                <view>{{userInfo.nickname}}</view>
+                <view>
+                    关注： {{snsProfile.followsAmountText}}   粉丝：{{snsProfile.fansAmountText}}
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="text-content text-black margin-top">
+        <view class="flex">
+            <view class="flex-sub" >
+                {{commentRecruit.directionText}}老师
+            </view>
+            <view class="text-red" >
+                {{commentRecruit.salary}}<text wx:if="{{commentRecruit.directionId === 1045}}">元</text>
+            </view>
+        </view>
+        <view class="margin-top-sm">
+            <text class="text-gray" > <text class="cuIcon-locationfill text-orange"></text>{{commentRecruit.address}} </text>
+        </view>
+        <view class="margin-top-sm">
+            <text class="" > {{commentRecruit.comment}} </text>
+        </view>
+    </view>
+</view>
+<view class="pl" ></view>
+
+<view class="fixed-bottom " hover-class="none" hover-stop-propagation="false" wx:if="{{userInfo.isSelf}}">
+    <div class="flex">
+        <div class="flex-sub">
+            <button class="cu-btn  round lg bg-green" disabled="{{!enableRefresh}}" bindtap="refresh">刷 新</button>
+        </div>
+        <div class="flex-sub">
+            <navigator open-type="navigate" url="/pages/info/edit-work/index?id={{commentRecruit.id}}">
+                <button class="cu-btn  round lg bg-blue" bindtap="edit">编 辑</button>
+            </navigator>
+        </div>
+    </div>
+</view>
+<view class="page-bottom bg-white" hover-class="none" hover-stop-propagation="false" bindtap = "goToChat" wx:else>
+    <button class="cu-btn bg-green shadow-blur round lg">聊 一 下</button>
+</view>

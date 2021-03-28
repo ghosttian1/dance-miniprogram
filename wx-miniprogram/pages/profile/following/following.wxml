@@ -1,0 +1,55 @@
+<!-- 头部 -->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+    <view slot="content">关注列表</view>
+</cu-custom>
+<scroll id="scroll"
+    class="cu-list menu-avatar"
+ 	
+	requesting="{{requesting}}"
+	empty-show="{{false}}"
+	end="{{end}}"
+	listCount="{{list.length}}"
+	enable-back-to-top="{{enableBackToTop}}"
+	refresh-size="{{refreshSize}}"
+	top-size="{{topSize}}"
+	bottom-size="{{bottomSize}}"
+	color="{{color}}"
+	bind:refresh="refresh"
+	bind:more="more">
+    <block wx:if="{{list.length > 0}}">
+        <view class="item flex bg-gray align-center solid-bottom" wx:for="{{list}}" wx:key="index">
+            <!-- 点击头像跳转到个人主页 -->
+            <navigator open-type="navigate" hover-class='none' url="/pages/profile/userhome/userhome?targetUserId={{item.userProfile.userinfo.userId}}">
+                <view class="cu-avatar round lg" style="background-image:url({{item.userProfile.userinfo.avatar}});"></view>
+            </navigator>
+            <view class="content flex-sub">
+                <navigator open-type="navigate" hover-class='none' url="/pages/profile/userhome/userhome?targetUserId={{item.userProfile.userinfo.userId}}">
+                <view class="text-black text-bold text-cut">
+                    {{item.userProfile.userinfo.nickname}}
+                </view>
+                </navigator>
+            </view>
+            <view class="action" wx:if="{{item.followStatus !== -1}}">
+                <!-- 尚未关注 -->
+                <button class="cu-btn margin-tb-sm bg-red text-white" wx:if="{{item.followStatus === 0 || item.followStatus === 2 }}" bindtap="follow" data-index="{{index}}" data-id="{{item.userProfile.userinfo.userId}}">
+                    <text class="cuIcon-like"></text>
+                    关注
+                </button>
+                <!-- 互相关注 -->
+                <button class="cu-btn  margin-tb-sm line-grey" wx:elif="{{item.followStatus === 3}}" bindtap="unfollow" data-index="{{index}}" data-id="{{item.userProfile.userinfo.userId}}" data-status="{{item.followStatus}}">
+                    <text class="cuIcon-likefill text-red"></text>
+                    互相关注
+                </button>
+                <!-- 已关注 -->
+                <button class="cu-btn  margin-tb-sm line-grey" wx:elif="{{item.followStatus === 1}}" bindtap="unfollow" data-index="{{index}}" data-id="{{item.userProfile.userinfo.userId}}" data-status="{{item.followStatus}}">
+                    <text class="cuIcon-likefill text-red"></text>
+                    取消关注
+                </button>
+            </view>
+        </view>
+    </block>
+    <view class="text-center flex align-center jusitify-center text-none" wx:else>
+        <text class="text-grey flex-sub">还没有关注用户哟</text>
+    </view>
+</scroll>
+

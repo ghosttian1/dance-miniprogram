@@ -1,0 +1,12 @@
+<view class="cu-bar tabbar {{active === 'dance' ? 'bg-black' : 'bg-white'}} shadow foot">
+  <!-- 首页 -->
+  <view class="action" bindtap="tap" bindtouchstart="touchStart" bindtouchend="touchEnd" data-name="{{item.name}}" wx:for="{{list}}" wx:key="index">
+    <view class='cuIcon-cu-image'>
+      <image class="img" src="{{active === item.name ? item.activePath : item.iconPath}}" style="{{item.style}}"></image>
+    </view>
+    <view class="{{ active === item.name ? 'text-green':'text-gray'}}">{{ item.text }}</view>
+    <view class="cu-tag badge" wx:if="{{ item.name === 'message' && unreadMsgAmount > 0}}">
+      {{unreadMsgAmount > 99 ? '99+' : unreadMsgAmount}}
+    </view>
+  </view>
+</view>

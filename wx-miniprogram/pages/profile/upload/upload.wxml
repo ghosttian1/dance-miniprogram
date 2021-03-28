@@ -1,0 +1,21 @@
+<import src="../../../components/we-cropper/we-cropper.wxml"/>
+
+<view class="cropper-wrapper">
+  <template is="we-cropper" data="{{...cropperOpt}}"/>
+  <cover-view class="cancel" bindtap = "cancel">
+    取消
+  </cover-view>
+  <view class="cropper-buttons" style="color: {{cropperOpt.boundStyle.color}}">
+    <view
+      class="upload btn"
+      bindtap="uploadTap">
+      重选
+    </view>
+    <view
+      class="getCropperImage btn"
+      style="background-color: {{cropperOpt.boundStyle.color}};"
+      bindtap="getCropperImage">
+      完成
+    </view>
+  </view>
+</view>

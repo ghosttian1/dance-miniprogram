@@ -1,0 +1,77 @@
+<view class="container flex flex-direction">
+	<cu-custom bgColor="bg-black">
+		<scroll-view scroll-x class="nav text-center" slot="content">
+			<view
+			 class="cu-item "
+			 bindtap="tabSelect"
+			>
+				关注
+			</view>
+			<view
+			 class="cu-item text-blue cur"
+			 bindtap="tabSelect"
+			>
+				推荐
+			</view>
+		</scroll-view>
+	</cu-custom>
+	<swiper
+	 class="video-swiper flex-sub"
+	 circular="{{circular}}"
+	 easing-function="{{easingFunction}}"
+	 vertical
+	 current="0"
+	 duration="{{duration}}"
+	 bindanimationfinish="change"
+	>
+		<swiper-item wx:for="{{video_list}}" wx:key="index" class="video-swiper-item">
+			<video
+			 id="video_{{index}}"
+			 autoplay="{{ index === currentVideo}}"
+			 class="video-item"
+			 loop="true"
+			 enable-play-gesture
+			 enable-progress-gesture
+			 show-center-play-btn="{{ true }}"
+			 controls="{{ false }}"
+			 src="{{item.video_src}}"
+			 data-id="{{index}}"
+			 object-fit="{{item.objectFit || 'contain'}}"
+			 bindloadedmetadata="onLoadedMetaData"
+			/>
+			<view class="box">
+				<view class="flex align-center">
+					<view class="cu-avatar round margin-left" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+					<view class="margin-left">
+						豆汁皇后
+					</view>
+					<button class="cu-btn round bg-yellow margin-left"> <text class="cuIcon-add"></text> 关注</button>
+				</view>
+				<view class="flex align-center margin-top">
+					牛奶味的卤豆干，简单美味, 快去试试吧
+				</view>
+			</view>
+			<view class="btn-box flex flex-direction text-right align-end">
+				<view class="btn text-xxl margin-top text-center">
+					<text class="cuIcon-likefill"></text>
+					<view class="text-df">
+						999
+					</view>
+				</view>
+
+				<view class="btn text-xxl margin-top text-center">
+					<text class="cuIcon-likefill"></text>
+					<view class="text-df">
+						999
+					</view>
+				</view>
+
+				<button class="cu-btn round margin-top text-df">
+					<text class="cuIcon-recordfill"></text>
+					发作品
+				</button>
+			</view>
+		</swiper-item>
+	</swiper>
+</view>
+

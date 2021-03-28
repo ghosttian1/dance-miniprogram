@@ -1,0 +1,134 @@
+<view class="container flex flex-direction">
+	<view style="height:{{CustomBar}}px" class="header-container fixed">
+		<view class="nav text-center" style="height:100%;padding-top:{{StatusBar}}px;">
+			<view class="cu-item {{tab === 'follow' ? 'text-white text-bold cur' : 'text-gray'}}" bindtap="tabSelect" data-tab="follow">
+				<view class="cu-tag badge" wx:if="{{isNewData}}"></view>
+				关注
+			</view>
+			<view class="cu-item {{tab === 'tui' ? 'text-white text-bold cur' : 'text-gray'}}" bindtap="tabSelect" data-tab="tui">
+				推荐
+			</view>
+		</view>
+	</view>
+	<view class="share-tip" hover-class="none" hover-stop-propagation="false" style="margin-top:{{StatusBar}}px;" wx:if="{{shareTip}}">
+		这里可以分享和添加小程序哦
+	</view>
+	<block wx:show="{{tab ==='tui'}}">
+		<video-swiper
+			class="video-swiper"
+			video-list="{{recommendVideoList}}"
+			startStop="{{recommendStop}}"
+			refresh="{{recommendRefresh}}"
+			bindplay="onPlay"
+			bindpause="onPause"
+			bindchange="onChange"
+			bindtimeupdate="onTimeUpdate"
+			bindended="onEnded"
+			binderror="onError"
+			bindwaiting="onWaiting"
+			bindprogress="onProgress"
+			bindloadedmetadata="onLoadedMetaData"
+			style="display: {{tab === 'follow' ? 'none' : 'block'}}"
+		>
+			<view slot="a-{{item.id}}" wx:for="{{recommendInfoList}}" wx:key="index">
+					<view class="box">
+							<view class="flex align-center">
+								<view bind:tap="goHome" data-id="{{item.userinfo.userId}}" class="flex align-center">
+										<view class="cu-avatar round" style="background-image:url({{item.userinfo.avatar}});"></view>
+										<view class="margin-left nickname">
+											{{item.userinfo.nickname}}
+										</view>
+								</view>
+								<button class="cu-btn round bg-yellow margin-left" wx:if="{{item.userSnsInfo.followStatus === 0 || item.userSnsInfo.followStatus === 2 }}" data-id="{{item.userinfo.userId}}" data-ugcId="{{item.id}}" bindtap="follow"> <text class="cuIcon-add"></text> 关注</button>
+							</view>
+							<view class="flex align-center margin-top content">
+								{{item.content}}
+							</view>
+					</view>
+					<view class="btn-box flex flex-direction text-right align-end">
+						<view class="btn text-xxl margin-top text-center">
+							<text class="cuIcon-weixin"></text>
+							<view class="text-df">
+								{{item.interactiveInfo.shareAmountText}}
+							</view>
+							<button class="share-btn" open-type="share" hover-class="none"></button>
+						</view>
+			
+						<view class="btn text-xxl margin-top text-center" bindtap="likeOrUnlike" data-hasLike='{{item.interactiveInfo.hasLike}}' data-ugcId="{{item.id}}">
+							<text class="cuIcon-likefill {{item.interactiveInfo.hasLike ? 'text-red' : ''}}" ></text>
+							<view class="text-df">
+								{{item.interactiveInfo.likeAmountText}}
+							</view>
+						</view>
+			
+						<button class="cu-btn round margin-top text-df" bindtap="publishVideo">
+							<text class="cuIcon-recordfill"></text>
+							发作品
+						</button>
+					</view>
+			</view>
+		</video-swiper>
+	</block>
+	<block wx:show="{{tab === 'follow'}}" >
+		<block wx:if="{{tab === 'follow' && followVideoList.length > 0}}">
+				<video-swiper
+					class="video-swiper"
+					video-list="{{followVideoList}}"
+					startStop="{{followStop}}"
+					refresh="{{followRefresh}}"
+					bindplay="onPlay"
+					bindpause="onPause"
+					bindchange="onChange"
+					bindtimeupdate="onTimeUpdate"
+					bindended="onEnded"
+					binderror="onError"
+					bindwaiting="onWaiting"
+					bindprogress="onProgress"
+					bindloadedmetadata="onLoadedMetaData"
+					style="display: {{tab === 'tui' ? 'none' : 'block'}}"
+				>
+					<view slot="a-{{item.id}}" wx:for="{{followInfoList}}" wx:key="index">
+							<view class="box">
+									<view class="flex align-center">
+										<view bind:tap="goHome" data-id="{{item.userinfo.userId}}" class="flex align-center">
+												<view class="cu-avatar round" style="background-image:url({{item.userinfo.avatar}});"></view>
+												<view class="margin-left nickname">
+													{{item.userinfo.nickname}}
+												</view>
+										</view>
+										<button class="cu-btn round bg-yellow margin-left" wx:if="{{item.userSnsInfo.followStatus === 0 || item.userSnsInfo.followStatus === 2 }}" data-id="{{item.userinfo.userId}}" data-ugcId="{{item.id}}" bindtap="follow"> <text class="cuIcon-add"></text> 关注</button>
+									</view>
+									<view class="flex align-center margin-top content">
+										{{item.content}}
+									</view>
+							</view>
+							<view class="btn-box flex flex-direction text-right align-end">
+								<view class="btn text-xxl margin-top text-center">
+									<text class="cuIcon-weixin"></text>
+									<view class="text-df">
+										{{item.interactiveInfo.shareAmountText}}
+									</view>
+									<button class="share-btn" open-type="share" hover-class="none"></button>
+								</view>
+					
+								<view class="btn text-xxl margin-top text-center" bindtap="likeOrUnlike" data-hasLike='{{item.interactiveInfo.hasLike}}' data-ugcId="{{item.id}}">
+									<text class="cuIcon-likefill {{item.interactiveInfo.hasLike ? 'text-red' : ''}}" ></text>
+									<view class="text-df">
+										{{item.interactiveInfo.likeAmountText}}
+									</view>
+								</view>
+					
+								<button class="cu-btn round margin-top text-df" bindtap="publishVideo">
+									<text class="cuIcon-recordfill"></text>
+									发作品
+								</button>
+							</view>
+					</view>
+				</video-swiper>
+		</block>
+		<view class="no-data" wx:elif="{{tab === 'follow' && followVideoList.length === 0 }}">
+			还没有关注内容
+		</view>
+	</block>
+</view>
+

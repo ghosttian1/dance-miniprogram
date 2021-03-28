@@ -1,0 +1,161 @@
+<cu-custom bgColor="bg-white" isBack="{{isBack}}">
+	<view slot="content" wx:if="{{!isSelf}}">TA的主页</view>
+	<view slot="content" wx:else>我的主页</view>
+</cu-custom>
+<view class="response bg-white padding solids-bottom">
+	<view class="align-center flex">
+		<view class="cu-avatar round lg" style="background-image:url({{targetUserInfo.avatar}})" bind:tap="updateUserInfo" />
+		<view class="content flex-sub margin-left text-cut">
+			<view class="text-cut text-bold text-black">{{targetUserInfo.nickname}}</view>
+			<view class="text-cut margin-top-sm text-gray" bindtap="copyID" data-id="{{currentUserInfo.userId}}">ID:{{targetUserInfo.userId}}</view>
+		</view>
+		<view class="padding flex text-center text-grey" wx:if="{{isSelf}}">
+			<navigator
+			 open-type="navigate"
+			 hover-class='none'
+			 url="/pages/profile/fans/fans?userId={{targetUserInfo.userId}}"
+			 class="cu-item"
+			>
+				<view class="flex flex-sub flex-direction ">
+					<view class="text-xxl text-bold text-black">{{fansAmountText}}</view>
+					<view class="text-gray text-center">粉丝</view>
+				</view>
+			</navigator>
+			<navigator
+			 open-type="navigate"
+			 hover-class='none'
+			 url="/pages/profile/following/following?userId={{targetUserInfo.userId}}"
+			 class="cu-item"
+			>
+				<view class="flex flex-sub flex-direction margin-left">
+					<view class="text-xxl text-bold text-black">{{followsAmountText}}</view>
+					<view class="text-gray text-center">关注</view>
+				</view>
+			</navigator>
+		</view>
+		<view class="padding flex text-center text-grey" wx:else>
+			<view class="cu-item" >
+				<view class="flex flex-sub flex-direction ">
+					<view class="text-xxl text-bold text-black">{{fansAmountText}}</view>
+					<view class="text-gray text-center">粉丝</view>
+				</view>
+			</view>
+			<view class="cu-item" >
+				<view class="flex flex-sub flex-direction margin-left">
+					<view class="text-xxl text-bold text-black">{{followsAmountText}}</view>
+					<view class="text-gray text-center">关注</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="">{{targetUserInfo.introduce}}</view>
+</view>
+
+<!-- 查看他人的主页 -->
+<view class="cu-list grid col-5 no-border btn-wrapper bg-gray" wx:if="{{isSelf === false}}">
+	<view></view>
+	<view class="cu-item" bind:tap="messageClick" >
+		<view class="cuIcon-messagefill text-green">
+		</view>
+		<text>私信</text>
+	</view>
+	<!-- 分享需要改为按钮，点击触发 -->
+	<button class="cu-item" open-type="share" hover-class="none">
+		<view class="cuIcon-share text-black"> </view>
+		<text>分享</text>
+	</button>
+	<view wx:if="{{followStatus==1||followStatus==3}}"  class="cu-item"  bindtap="unfollowClick" >
+		<view class="cuIcon-likefill text-red">
+		</view>
+		<text>已关注</text>
+	</view>
+	<view wx:else class="cu-item"  bindtap="followClick" >
+		<view class="cuIcon-like">
+		</view>
+		<text>关注</text>
+	</view>
+	<view></view>
+</view>
+
+<view wx:if="{{isSelf && pageConfig.comment === 'true'}}">
+	<navigator class="cu-list menu margin-top" open-type="navigate" url="/pages/profile/release/release">
+		<view class="cu-item arrow">
+			<view class="content">
+				<text class="text-black text-blod">我发布的</text>
+			</view>
+		</view>
+	</navigator>
+</view>
+<view class="margin-top bg-white ">
+	<view class="flex justify-between text-center align-center zuo menu nav" wx:if="{{isSelf}}">
+		<view class="margin-left-lg text-grey flex-sub {{tabCur === '0' ? 'cur' : '' }} cu-item " bindtap="tabSelect" data-tab="0">
+			<view class="item text-bold text-black">
+				共 <text class="text-orange">{{postedAmount}}</text> 作品
+			</view>
+		</view>
+		<view class="margin-right-lg text-grey flex-sub cu-item {{tabCur === '1' ? 'cur' : '' }} " bindtap="tabSelect" data-tab="1">
+			<view class="item text-bold text-black">
+				喜欢 <text class="text-orange">{{likedAmount}}</text> 
+			</view>
+		</view>
+	</view>
+	<view class="flex align-center justify-center zuo line-gray"  wx:else>
+		<view class="text-grey">
+			<view class="item text-bold text-black">
+				共 <text class="text-orange">{{postedAmount}}</text> 作品
+			</view>
+		</view>
+	</view>
+	<view class="bg-white padding nei" wx:if="{{tabCur === '0'}}">
+		<view class="grid col-3 grid-square" wx:if="{{postedUgcList.length>0}}">
+			<view
+			class="bg-img"
+			wx:for="{{postedUgcList}}"
+			wx:key="index"
+			bindtap="goDetail"
+			data-id="{{item.id}}"
+			data-type="20"
+			style="background-image:url({{item.coverRes.resUrl}});"
+			>
+				<view class="bg-shadeTop padding padding-bottom-xl text-center text-red">
+					<block wx:if="{{item.status === 10}}">
+						审核中
+					</block>
+					<block wx:elif="{{item.status === 30}}">
+						审核不通过
+					</block>
+					<block wx:elif="{{item.status === 50}}">
+						已封禁
+					</block>
+				</view>
+			</view>
+		</view>
+		<view class="text-gray text-center margin" wx:elif="{{postedUgcList.length === 0 && !postedParams.hasNext}}">
+			还没有发作品哟 
+			<navigator url="/pages/dance/video-publish/index" wx:if="{{isSelf}}">
+				<button class="cu-btn block bg-green margin-tb-sm lg margin-top"> 立即发布</button>
+			</navigator> 
+		</view>
+	</view>
+	<view class="bg-white padding nei" wx:else>
+		<view class="grid col-3 grid-square" wx:if="{{likeList.length>0}}">
+			<view
+			class="bg-img"
+			wx:for="{{likeList}}"
+			wx:key="index"
+			bindtap="goDetail"
+			data-id="{{item.id}}"
+			data-type="30"
+			style="background-image:url({{item.coverRes.resUrl}});"
+			>
+		
+			</view>
+		</view>
+		<view class="text-gray text-center margin" wx:elif="{{likeList.length === 0 && !likedParams.hasNext}}">
+			还没有喜欢哟
+		</view>
+	</view>
+</view>
+<!-- 底部占位符 -->
+<view class='cu-tabbar-height' />
+

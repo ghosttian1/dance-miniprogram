@@ -1,0 +1,39 @@
+<!-- 头部 -->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+    <view slot="content">发布视频</view>
+</cu-custom>
+<view style="margin-bottom:200rpx;">
+    <view class="text-center margin-top-lg" wx:if="{{!!video}}">
+        <video src="{{video}}"></video>
+    </view>
+    <view class="add-btn text-center margin-top-lg" wx:else>
+        <text class="cuIcon-roundaddfill lg text-green icon" bindtap="addVideo"></text>
+        <text class="text-gray" selectable="" space="false" decode="false">
+            视频最长2分钟
+        </text>
+    </view>
+    
+    <view class="intro margin-top-lg">
+		<view class="title">添加标题</view>
+		<textarea maxlength="30" bindinput="titleInput" bindblur="titleBlur" value="{{title}}" placeholder="说点什么吧" auto-height></textarea>
+        <text class="text-gray nums">{{areaLen}}/30</text>
+	</view>
+    <view class="tag">
+        <!-- <textarea bindinput="tagInput" value="{{topic}}" style="height:120rpx" placeholder="输入#分割多个标签，示例：#拉丁#伦巴" /> -->
+        <view class="" hover-class="none" hover-stop-propagation="false">
+            <button class="cu-btn margin-top" bindtap="inputSign">#话题</button>
+        </view>
+    </view>
+
+</view>
+<view class="publish">
+    <block wx:if="{{userBanInfo.ugc !== 10}}">
+        <button class="cu-btn block bg-green margin-tb-sm lg" disabled> 禁止发布</button>
+    </block>
+    <block wx:else>
+        <button class="cu-btn block bg-green margin-tb-sm lg" disabled="{{!agree}}" bindtap="publish"> 发 布</button>
+    </block>
+    <view class="text-center margin-top" style="margin-top: 50rpx;">
+        <checkbox-group bindchange="checkChange"><checkbox class="margin-right-sm select" checked value="true"></checkbox></checkbox-group>发布即代表您同意 <navigator class="text-blue" url="/pages/agreement/index">用户协议</navigator> 和 <navigator class="text-blue" url="/pages/privacy/index">隐私政策</navigator>
+    </view>
+</view>

@@ -1,0 +1,6 @@
+page{
+    height: 100vh;
+}
+.cu-tag.badge{
+    right: 15%;
+}

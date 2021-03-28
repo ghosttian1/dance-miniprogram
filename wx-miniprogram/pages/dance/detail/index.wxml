@@ -1,0 +1,77 @@
+<!-- 头部 -->
+
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="content">舞圈</view>
+</cu-custom>
+<view class="container" hover-class="none" hover-stop-propagation="false" >
+	<swiper class="video-swiper"  vertical duration="200" bindchange="swiperChange">
+        <swiper-item wx:for="{{recommendList}}" wx:key="id">
+            <video 
+            wx:if="{{item.status==40 && item.id === recommendActiveId}}"
+            id="videoRecommend" 
+            class="video_item" 
+            src="{{item.videoRes.resUrl}}" 
+            loop="{{true}}" 
+						autoplay 
+            enable-progress-gesture="{{false}}"
+						controls="{{controls}}"
+            show-play-btn="{{false}}"
+            show-fullscreen-btn="{{false}}"
+            data-id="{{item.id}}"
+            object-fit="contain"
+            data-index="{{index}}"
+            bindtap = "stopPlayVideo"
+            bindplay="onPlay"
+            bindpause="onPause"
+            bindended="onEnded"
+            binderror="onError"
+            bindtimeupdate="onTimeUpdate"
+            bindwaiting="onWaiting"
+            bindprogress="onProgress"
+            bindloadedmetadata="onLoadedMetaData"
+          >
+            <view wx:if="{{recommendVideoPause}}" class="play-btn cu-item" >
+              <text class="cuIcon-playfill lg text-white" bind:tap="playVideo"></text>
+            </view>
+          </video>
+          <view>
+              <view class="box">
+                  <view class="flex align-center">
+                    <view bind:tap="goHome" data-id="{{item.userProfile.userinfo.userId}}" class="flex align-center">
+                        <view class="cu-avatar round" style="background-image:url({{item.userProfile.userinfo.avatar}});"></view>
+                        <view class="margin-left nickname">
+                          {{item.userProfile.userinfo.nickname}}
+                        </view>
+                    </view>
+                    <button class="cu-btn round bg-yellow margin-left" wx:if="{{item.userSnsInfo.followStatus === 0 || item.userSnsInfo.followStatus === 2 }}" data-id="{{item.userProfile.userinfo.userId}}" data-ugcId="{{item.id}}" bindtap="follow"> <text class="cuIcon-add"></text> 关注</button>
+                  </view>
+                  <view class="flex align-center margin-top content">
+                    {{item.content}}
+                  </view>
+              </view>
+              <view class="btn-box flex flex-direction text-right align-end">
+                <view class="btn text-xxl margin-top text-center">
+                  <text class="cuIcon-weixin"></text>
+                  <view class="text-df">
+                    {{item.interactiveInfo.shareAmountText}}
+                  </view>
+                  <button class="share-btn" open-type="share" hover-class="none" wx:if="{{item.status === 40}}"></button>
+                </view>
+          
+                <view class="btn text-xxl margin-top text-center" bindtap="likeOrUnlike" data-hasLike='{{item.interactiveInfo.hasLike}}' data-ugcId="{{item.id}}">
+                  <text class="cuIcon-likefill {{item.interactiveInfo.hasLike ? 'text-red' : ''}}" ></text>
+                  <view class="text-df">
+                    {{item.interactiveInfo.likeAmountText}}
+                  </view>
+                </view>
+          
+                <button class="cu-btn round margin-top text-df" bindtap="publishVideo">
+                  <text class="cuIcon-recordfill"></text>
+                  发作品
+                </button>
+              </view>
+          </view>
+        </swiper-item>
+		</swiper>
+</view>
+

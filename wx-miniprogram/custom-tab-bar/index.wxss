@@ -1,0 +1,25 @@
+
+page{
+  height: 100vh;
+}
+.cu-tag.badge{
+  right: 15%;
+  color: #fff;
+}
+.cu-bar.tabbar .action .cuIcon-cu-image cover-image {
+  width: 50rpx;
+  height: 50rpx;
+  line-height: initial;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0;
+}
+  
+.bg-black {
+  background-color: #333333;
+  color: #ffffff;
+}
+.bg-white{
+  background-color: #fff;
+}
+  

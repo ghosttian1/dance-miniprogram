@@ -1,0 +1,23 @@
+<!--pages/profile/user/edit.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="content">个人中心</view>
+</cu-custom>
+<view>
+    <view class="text-center margin-top-xl">
+        <view class="cu-avatar xl round margin-left" style="background-image:url('{{obj.avatar}}'); margin:auto;" bindtap="choseAvatar"></view>
+    </view>
+    <view>
+        <view class="cu-form-group">
+            <input placeholder="昵称" bindinput="getValueLength" data-min="20" maxlength="20" value="{{currentUserInfo.nickname}}" bindblur="nicknameBlur"></input>
+            <text class="text-gray">{{nameLen}}/20</text>
+        </view>
+        <view class="cu-form-group border" style="display:block;">
+            <textarea maxlength="100" bindblur="introduceBlur"  bindinput="textareaAInput" placeholder="介绍下自己吧" value="{{currentUserInfo.introduce}}"></textarea>
+            <text class="text-gray nums">{{areaLen}}/100</text>
+        </view>
+    </view>
+</view>
+<view class="bottom-btn" >
+    <!-- <button class="cu-btn lg round text-green" bindtap="sendData">完 成</button> -->
+    <button class="cu-btn bg-green shadow-blur round lg" bindtap="sendData">更 新</button>
+</view>

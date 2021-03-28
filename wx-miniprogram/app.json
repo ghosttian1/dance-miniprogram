@@ -1,0 +1,63 @@
+{
+  "pages": [
+    "pages/dance/main/main",
+    "pages/dance/home/home",
+    "pages/index/index",
+    "pages/agreement/index",
+    "pages/privacy/index",
+    "pages/profile/home/home",
+    "pages/dance/video-publish/index",
+    "pages/dance/detail-mine/index",
+    "pages/profile/userhome/userhome",
+    "pages/profile/myhome/myhome",
+    "pages/profile/user/edit",
+    "pages/login/login",
+    "pages/info/edit-work/index",
+    "pages/info/edit-dress/index",
+    "pages/info/detail-dress/dress",
+    "pages/info/detail-work/work",
+    "pages/info/detail-dance/detail",
+    "pages/info/home/home",
+    "pages/info/edit-dance/index",
+    "pages/profile/release/release",
+    "pages/profile/fans/fans",
+    "pages/profile/following/following",
+    "pages/info/city/city",
+    "pages/message/home/home",
+    "pages/message/chat/chat",
+    "pages/dance/detail/index",
+    "custom-tab-bar/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/dance/main/main",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/info/home/home",
+        "text": "舞圈"
+      },
+      {
+        "pagePath": "pages/message/home/home",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/profile/myhome/myhome",
+        "text": "我"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

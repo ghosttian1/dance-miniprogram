@@ -1,0 +1,35 @@
+[
+    {
+        "product": {
+            "img_video": {
+                "video": [
+                    {
+                        "url": "http://wtest.1758.com/static/test/1.mp4"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "product": {
+            "img_video": {
+                "video": [
+                    {
+                        "url": "http://wtest.1758.com/static/test/2.mp4"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "product": {
+            "img_video": {
+                "video": [
+                    {
+                        "url": "http://wtest.1758.com/static/test/3.mp4"
+                    }
+                ]
+            }
+        }
+    }
+]

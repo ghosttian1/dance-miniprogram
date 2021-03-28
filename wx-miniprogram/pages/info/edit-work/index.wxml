@@ -1,0 +1,51 @@
+<!-- 头部 -->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="content">找老师</view>
+</cu-custom>
+<form class="form">
+	<view class="cu-form-group">
+		<view class="title">教学方向</view>
+		<picker bindchange="directionChange" range="{{workDirection}}" data-type="direction" range-key="text" value="{{directionIndex}}">
+			<view class="picker {{obj.direction ? 'text-black' : 'text-gray'}}">
+				{{obj.direction  ? workDirection[directionIndex].text :'填写教学方向'}}
+			</view>
+		</picker>
+	</view>
+    <view class="cu-form-group" wx:if="{{obj.direction === 1045}}">
+		<view class="title">费用(元)</view>
+		<input placeholder="请输入费用" type="number" bindinput="moneyInput" value="{{obj.money}}"></input>
+	</view>
+	<view class="cu-form-group" wx:else>
+		<view class="title">薪资(k)</view>
+		<picker mode="multiSelector" bindchange="moneyChange" bindcolumnchange="bindMonthColumnChange"  range="{{moneyPicker}}" data-type="month" range-key="text" value="{{moneyIndex}}">
+			<view class="picker {{obj.salary ? 'text-black': 'text-gray'}}">
+				{{obj.salary? obj.salary :'薪资'}}
+			</view>
+		</picker>
+	</view>
+	<view class="cu-form-group">
+		<view class="title">工作城市</view>
+		<picker mode="multiSelector" bindchange="bindCityPickerChange" bindcolumnchange="bindCityColumnChange" range="{{cityList}}" range-key="name" value="{{cityIndex}}">
+			<view class="picker {{cityShow ? 'text-black' : 'text-gray'}}">
+				{{ cityShow ? cityShow :'选择工作城市'}}
+			</view>
+		</picker>
+	</view>
+	
+	<view class="intro">
+		<view class="title">详细地址</view>
+		<textarea maxlength="{{addressMaxLen}}" style="height:130rpx;"  bindblur="addressBlur" bindinput="addressInput" value="{{obj.address}}" placeholder="填写你的详细地址"></textarea>
+		<text class="text-gray nums">{{addressLen}}/{{addressMaxLen}}</text>
+	</view>
+	
+	<view class="intro">
+		<view class="title">要求</view>
+		<textarea maxlength="300" disabled="{{modalName!=null}}" bindinput="commentInput" bindblur="commentBlur" placeholder="描述你期望的老师" value="{{obj.comment}}"></textarea>
+        <text class="text-gray nums">{{areaLen}}/300</text>
+	</view>
+</form>
+
+<view class="padding-lg">
+	<button class="cu-btn block bg-green margin-tb-sm lg" bindtap="publish"> {{isEdit ? '保 存' : '发 布'}}</button>
+</view>
+

@@ -1,0 +1,68 @@
+<!-- 头部 -->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+		<view slot="content">赛服转让</view>
+</cu-custom>
+<form>
+		<view class="intro main-title">
+				<textarea placeholder="品类品牌型号会帮助买家更容易发现你的商品" bindblur="titleInput" bindinput="setTitleLen" maxlength="20" value="{{title}}" placeholder-style="color: #000;font-weight: bold;"></textarea>
+				<text class="text-gray nums">{{titleLen}}/20</text>
+		</view>
+		<view class="intro">
+				<textarea id="comment" maxlength="300" bindinput="textareaAInput" value="{{comment}}" placeholder="商品描述：品牌/品类/类型，有哪些附件 \n商品瑕疵情况：是否划痕磨损染色破损翻新护理 \n商品附件情况：尘袋/小票/身份卡/包装盒是否齐全  \n商品配送方式：包邮还是顺丰到付 " bindfocus="infoFocus" bindblur="textareaBlur" value="{{comment}}"></textarea>
+				<text class="text-gray nums">{{areaLen}}/300</text>
+		</view>
+		<view class="cu-bar bg-white">
+				<view class="action">图片上传</view>
+				<view class="action">{{imgList.length}}/9</view>
+		</view>
+		<view class="cu-form-group">
+				<view class="grid col-4 grid-square flex-sub">
+						<view class="bg-img" wx:for="{{imgList}}" wx:key="index" bindtap="ViewImage" data-url="{{imgList[index]}}">
+								<image src='{{imgList[index]}}' mode='aspectFill'></image>
+								<view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+										<text class="cuIcon-close"></text>
+								</view>
+						</view>
+						<view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<9}}">
+								<text class="cuIcon-cameraadd"></text>
+						</view>
+				</view>
+		</view>
+		<view class="cu-form-group margin-top price">
+				<view class="title">售价</view>
+				<view class="{{showPrice ? '' :'text-gray'}}" bindtap="openPriceModal">
+						{{showPrice ? '￥' + showPrice : '请输入售价'}}
+				</view>
+		</view>
+		<view class="cu-form-group">
+				<view class="" hover-class="none" hover-stop-propagation="false">
+						<view class="cu-tag radius {{index === tagActive ? 'bg-green' : ''}}" wx:for="{{clothesType}}" wx:key="value" bindtap="switchTagStatus" data-index="{{index}}" data-item="{{item}}">
+								{{item.text}}
+						</view>
+				</view>
+		</view>
+</form>
+<view class="padding-lg">
+		<button class="cu-btn block bg-green margin-tb-sm lg" bindtap="publish">
+				{{isEdit ? '保 存' : '发 布'}}
+		</button>
+</view>
+<view class="cu-modal bottom-modal {{priceModal ? 'show':''}}">
+		<view class="cu-dialog bg-white padding-bottom">
+				<view class="cu-bar bg-white">
+						<view class="action text-green"></view>
+						<view class="action text-blue" bindtap="hidePriceModal">关闭</view>
+				</view>
+				<view class="padding-lr-xs padding-tb-lg">
+						<view class="cu-form-group">
+								<view class="title">售价</view>
+								<input placeholder="￥0.00" type="digit" hold-keyboard="{{true}}" always-embed="{{true}}" cursor-spacing="{{150}}" class="text-right" bindinput="priceInput" value="{{price}}"></input>
+						</view>
+						<view class="cu-form-group">
+								<view class="title">原价</view>
+								<input placeholder="￥0.00" type="digit" hold-keyboard="{{true}}" always-embed="{{true}}" cursor-spacing="{{102}}" class="text-right" bindinput="originPriceInput" value="{{originPrice}}"></input>
+						</view>
+						<button class="cu-btn block bg-green margin-tb-sm lg" bindtap="changeShowPrice">确 认</button>
+				</view>
+		</view>
+</view>

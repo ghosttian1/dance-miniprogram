@@ -1,0 +1,98 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="content">我发布的</view>
+</cu-custom>
+
+<view class="bg-white nav border-bottom dashed-bottom" >
+    <view class="flex text-center">
+      <view class="cu-item flex-sub {{index==tabCur?'text-green cur':''}}" wx:for="{{tabList}}" wx:key="value"  bindtap="tabSelect" data-id="{{index}}">
+      {{item.text}}
+      </view>
+    </view>
+</view>
+<view class="bg-yellow text-white notice" wx:if="{{sysTip}}">
+  小提示：进入详情刷新可以让信息再次曝光哦
+  <view class="close" bindtap = "closeSysTip">
+    <text class="cuIcon-roundclose"></text>
+  </view>
+</view>
+
+<view class="main not">
+  <view class="cu-list menu-avatar" wx:if="{{tabCur === 0}}">
+    <block class="" wx:if="{{danceList.length > 0}}">
+        <view class="item {{modalName=='move-box-'+ index?'move-cur':''}} solid-bottom"  bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" bindtap = "goDetail" data-target="move-box-{{index}}" data-id="{{item.commentPartner.id}}" wx:for="{{danceList}}" wx:key="index">
+          <view class="content">
+            <view class="text-black">{{item.commentPartner.majorText}}舞伴</view>
+            <view class="flex flex-wrap padding-right margin-top-xs">
+              <view class="padding-right-sm">
+                <view class="cu-tag bg-red light round text-xs">{{item.commentPartner.genderText}}</view>
+              </view>
+              <view class="padding-right-sm">
+                <view class="cu-tag bg-red light round text-xs">{{item.commentPartner.height}}cm</view>
+              </view>
+              <view class="padding-right-sm">
+                <view class="cu-tag bg-red light round text-xs">{{item.commentPartner.levelText}}</view>
+              </view>
+              <view class="padding-right-sm">
+                <view class="cu-tag bg-red light round text-xs">{{item.commentPartner.danceAge}}年</view>
+              </view>            
+            </view>
+  
+            <view class="sm text-right response  text-grey">
+              {{item.commentPartner.actionTimeShow}}
+            </view>
+          </view>
+          <view class="move bg-red" catchtap="move" id="move" data-id="{{item.commentPartner.id}}" data-type="dance">
+            <view class="bg-red" id="move">删除</view>
+          </view>
+        </view>
+    </block>
+    <view class="no-data text-gray" wx:else>
+        暂时没有内容哦
+    </view>
+  </view>
+  <view class="cu-list menu-avatar" wx:elif="{{tabCur === 1}}">
+    <block wx:if="{{clothesList.length > 0}}">
+        <view class="item {{modalName=='move-box-'+ index?'move-cur':''}} solid-bottom" wx:for="{{clothesList}}" wx:key="index" bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" bindtap = "goDetail" data-target="move-box-{{index}}" data-id="{{item.commentTransfer.id}}">
+          <view class="content">
+            <view class="text-black">{{item.commentTransfer.title}}</view>
+            <view>
+              <text class="text-price text-red text-xl">{{item.commentTransfer.price/100}}</text>
+              <text class="text-price text-gray margin-left" style="text-decoration:line-through">{{item.commentTransfer.originalPrice/100}}</text>
+            </view>
+            <view class="sm text-right response  text-grey">
+              {{item.commentTransfer.actionTimeShow}}
+            </view>
+          </view>
+          <view class="move bg-red" catchtap="move" id="move" data-id="{{item.commentTransfer.id}}" data-type="dress">
+            <view class="bg-red" id="move">删除</view>
+          </view>
+        </view>
+    </block>
+    <view class="no-data text-gray" wx:else>
+        暂时没有内容哦
+    </view>
+  </view>
+  <view class="cu-list menu-avatar" wx:elif="{{tabCur === 2}}">
+    <block wx:if="{{workList.length > 0}}">
+        <view class="item {{modalName=='move-box-'+ index?'move-cur':''}} solid-bottom" wx:for="{{workList}}" wx:key="index" bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" bindtap = "goDetail" data-target="move-box-{{index}}" data-id="{{item.commentRecruit.id}}">
+          <view class="content">
+            <view class="flex" >
+              <view class="text-black flex-sub">{{item.commentRecruit.directionText}}老师</view>
+              <view class="text-red">
+                <text class="text-xl">{{item.commentRecruit.salary}}</text><text class="text-xl" wx:if="{{item.commentRecruit.directionId === 1045}}">元</text>
+              </view>
+            </view>
+            <view class="sm text-right response  text-grey margin-top-sm">
+              {{item.commentRecruit.actionTimeShow}}
+            </view>
+          </view>
+          <view class="move bg-red" catchtap="move" id="move" data-id="{{item.commentRecruit.id}}" data-type="work">
+            <view class="bg-red" id="move">删除</view>
+          </view>
+        </view>
+    </block>
+    <view class="no-data text-gray" wx:else>
+        暂时没有内容哦
+    </view>
+  </view>
+</view>

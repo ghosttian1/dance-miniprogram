@@ -1,0 +1,49 @@
+<view class="container">
+  <swiper 
+    class="video-swiper" 
+    circular="{{circular}}" 
+    easing-function="{{easingFunction}}" 
+    vertical 
+    current="{{current}}"
+    duration="{{duration}}" 
+    bindchange="swiperChange"
+    bindtransition="swiperTransition">
+    <!-- curQueue 循环会导致video重新插入，objectFit 不可变更 -->
+    <swiper-item wx:for="{{curQueue}}" wx:key="index">
+      <video 
+        wx:if="{{index === current}}"
+        id="video_{{index}}" 
+        class="video_item" 
+        loop="{{loop}}" 
+        enable-play-gesture 
+        enable-progress-gesture
+        autoplay="{{false}}" 
+        enable-progress-gesture="{{false}}"
+        show-center-play-btn="{{false}}"
+        controls="{{false}}"
+        src="{{item.url}}" 
+        data-id="{{item.id}}"
+        object-fit="{{item.objectFit || 'contain'}}"
+        data-index="{{index}}"
+        bindtap = "playOrStop"
+        bindplay="onPlay"
+        bindpause="onPause"
+        bindended="onEnded"
+        binderror="onError"
+        bindtimeupdate="onTimeUpdate"
+        bindwaiting="onWaiting"
+        bindprogress="onProgress"
+        bindloadedmetadata="onLoadedMetaData"
+      >
+      <view wx:if="{{videoPause}}" class="play-btn cu-item" >
+        <text class="cuIcon-playfill lg text-white" bind:tap="playStop"></text>
+      </view>
+      </video>
+      <view wx:else style="height:100%;width:100%;position:relative;" data-id="{{item.id}}">
+        <image src="{{item.coverUrl}}" mode="aspectFit"  lazy-load="false" style="width:100%;height:100%;"></image>
+      </view>
+      <slot name="a-{{item.id}}"></slot>
+    </swiper-item>
+  </swiper>
+</view>
+

@@ -1,0 +1,120 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="content">{{otherUserInfo.nickname || '聊天'}}</view>
+</cu-custom>
+<view class="cu-chat" id="j_page">
+  <block wx:for="{{list}}" wx:key="id">
+    <view class="cu-item self" wx:if="{{item.senderUserId === myUserInfo.userId}}">
+      <view class="main">
+       <image wx:if="{{item.msgType === 'image'}}" src="{{item.resInfo.resUrl}}" class="radius" mode="widthFix" data-resurl="{{item.resInfo.resUrl}}" bindtap="previewImage" />
+        <view class="content bg-green" wx:else>
+          <text>{{item.content || '无内容 '}}</text>
+        </view>
+         </view>
+      <navigator open-type="navigate" hover-class='none' url="/pages/profile/userhome/userhome?targetUserId={{myUserInfo.userId}}">
+      <view class="cu-avatar radius" style="background-image:url({{myUserInfo.avatar}});" />
+      </navigator>
+      <view class="date">{{item.timeText}}</view>
+    </view>
+    <view wx:else class="cu-item">
+     <navigator open-type="navigate" hover-class='none' url="/pages/profile/userhome/userhome?targetUserId={{otherUserInfo.userId}}">
+      <view class="cu-avatar radius" style="background-image:url({{otherUserInfo.avatar}});" />
+      </navigator>
+      <view class="main">
+        <image wx:if="{{item.msgType === 'image'}}" src="{{item.resInfo.resUrl}}" class="radius" mode="widthFix" data-resurl="{{item.resInfo.resUrl}}" bindtap="previewImage" />
+        <view class="content" wx:else>
+          <text>{{item.content || '无内容 '}}</text>
+        </view>
+        </view>
+      <view class="date">{{item.timeText}}</view>
+    </view>
+  </block>
+  <!-- <view class="cu-info round">对方撤回一条消息!</view>
+  
+  <view class="cu-item">
+    <view class="cu-avatar radius" style="background-image:url({{chatAvatarUrl}});"></view>
+    <view class="main">
+      <view class="content shadow">
+        <text>太好了，这样我们也省事！不过中间我们可能会提一些修改意见，到时候你们别嫌烦就行。</text>
+      </view>
+    </view>
+    <view class="date "> 13:23</view>
+  </view>
+  
+  <view class="cu-info">
+    <text class="cuIcon-roundclosefill text-red "></text> 对方拒绝了你的消息
+  </view>
+  <view  class="cu-info">
+    对方开启了好友验证，你还不是他(她)的好友。请先发送好友验证请求，对方验证通过后，才能聊天。
+    <text class="text-blue">发送好友验证</text>
+  </view>
+  
+  <view class="cu-item self">
+    <view class="main">
+      <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" class="radius" mode="widthFix"></image>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
+    <view class="date"> 13:23</view>
+  </view>
+  <view class="cu-item self">
+    <view class="main">
+      <view class="content bg-green shadow">
+        <text>ok，还是下午吧，具体时间你定</text>
+      </view>
+    </view>
+    
+    <view class="main">
+      <view class="action text-bold text-grey">
+        3"
+      </view>
+      <view class="content shadow">
+        <text class="cuIcon-sound text-xxl padding-right-xl"> </text>
+        
+      </view>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url({{avatarUrl}});"></view>
+    <view class="date">13:23</view>
+  </view>
+
+  <view class="cu-item">
+    <view class="cu-avatar radius" style="background-image:url({{chatAvatarUrl}});"></view>
+    <view class="main">
+      <view class="content shadow">
+      下午三点，地点还在上次碰的地方？
+      </view> 
+    </view>
+    <view class="date">13:23</view>
+  </view>
+
+
+  <view class="cu-item self">
+    <view class="main">
+      <view class="main">
+        <view class="content bg-green shadow">
+          <text>没问题</text>
+        </view>
+      </view>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url({{avatarUrl}});"></view>
+    <view class="date">13:23</view>
+  </view> -->
+</view>
+
+<!--底部占位符 --> 
+<view class='cu-tabbar-height'></view>
+
+<view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px" wx:if="{{userBanInfo.message === 10}}">
+  <view class="action">
+    <!-- <text class="cuIcon-sound text-grey" /> -->
+  </view>
+  <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10" confirm-type="send" bindinput="inputText" value="{{inputValue}}" placeholder="输入信息"/>
+  <view class="action" bindtap="choseImg">
+    <text class="cuIcon-picfill text-grey" />
+  </view>
+  <button class="cu-btn bg-green shadow" bindtap="sendData">发送</button>
+</view>
+
+<view class="cu-bar foot input text-center" wx:else>
+  <view class="text-center text-gray disabled">
+    被禁言
+  </view>
+</view>

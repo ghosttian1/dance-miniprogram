@@ -1,0 +1,62 @@
+<!-- 头部 -->
+
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="content">舞圈</view>
+</cu-custom>
+<view class="flex  justify-end flex-direction container" hover-class="none" hover-stop-propagation="false" style="height:calc(100vh - {{CustomBar}}px)">
+		<view class="flex-sub" hover-class="none" hover-stop-propagation="false" style="position:relative;overflow:hidden;" >
+			<video 
+					wx:if="{{item.status!=-1 && item.status!=50}}"
+					class="video_item" 
+					loop="{{true}}" 
+					enable-progress-gesture="{{false}}"
+					autoplay="{{true}}" 
+					controls="{{false}}"
+					show-center-play-btn="{{false}}"
+					show-play-btn="{{false}}"
+					show-fullscreen-btn="{{false}}"
+					src="{{item.videoRes.resUrl}}" 
+					data-id="{{item.id}}"
+					object-fit="{{item.objectFit || 'container'}}"
+					bindtap = "playStop"
+					id="video"
+				>
+					<view wx:if="{{videoPause}}" class="play-btn cu-item" >
+						<text class="cuIcon-playfill lg text-white" bind:tap="playStop"></text>
+					</view>
+				</video>
+				<view class="box">
+							<view class="flex align-center">
+								<view bind:tap="goHome" data-id="{{item.userProfile.userinfo.userId}}" class="flex align-center">
+										<view class="cu-avatar round" style="background-image:url({{item.userProfile.userinfo.avatar}});"></view>
+										<view class="margin-left nickname">
+											{{item.userProfile.userinfo.nickname}}
+										</view>
+								</view>
+								<button class="cu-btn round bg-yellow margin-left" wx:if="{{item.userSnsInfo.followStatus === 0 || item.userSnsInfo.followStatus === 2 }}" data-id="{{item.userProfile.userinfo.userId}}" data-ugcId="{{item.id}}" bindtap="follow"> <text class="cuIcon-add"></text> 关注</button>
+							</view>
+							<view class="flex align-center margin-top content">
+								{{item.content}}
+							</view>
+					</view>
+					<view class="btn-box flex flex-direction text-right align-end" wx:if="{{item.status === 40}}">
+						<view class="btn text-xxl margin-top text-center">
+							<text class="cuIcon-weixin"></text>
+							<view class="text-df">
+								{{item.interactiveInfo.shareAmountText}}
+							</view>
+							<button class="share-btn" open-type="share" hover-class="none" wx:if="{{item.status === 40}}"></button>
+						</view>
+			
+						<view class="btn text-xxl margin-top text-center" bindtap="likeOrUnlike" data-hasLike='{{item.interactiveInfo.hasLike}}' data-ugcId="{{item.id}}">
+							<text class="cuIcon-likefill {{item.interactiveInfo.hasLike ? 'text-red' : ''}}" ></text>
+							<view class="text-df">
+								{{item.interactiveInfo.likeAmountText}}
+							</view>
+						</view>
+					</view>
+		</view>
+		<view class="page-bottom bg-white flex" hover-class="none" hover-stop-propagation="false">
+			<button class="cu-btn bg-red shadow-blur round lg" bindtap="deleteInfo">删 除</button>
+		</view>
+</view>

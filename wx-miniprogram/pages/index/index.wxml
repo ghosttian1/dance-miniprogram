@@ -1,0 +1,38 @@
+<dance wx:if="{{PageCur=='dance'}}" id="dance"></dance>
+<view style="display:{{PageCur==='info' ? 'block' : 'none'}};">
+  <info  id="info" activeTab="{{infoTab}}" ></info>
+</view>
+<message wx:if="{{PageCur=='message'}}" id="message"></message>
+<profile wx:elif="{{PageCur=='profile'}}" id="profile"></profile>
+<view class="cu-bar tabbar {{PageCur === 'dance' ? 'bg-black' : 'bg-white'}} shadow foot">
+  <view class="action" bindtap="multipleTap" data-cur="dance"  bindtouchstart="touchStart" bindtouchend="touchEnd">
+    <view class='cuIcon-cu-image' wx:if="{{PageCur === 'dance'}}">
+      <image src="/images/tabbar/home{{PageCur=='dance'?'_cur':''}}.png" style="padding:4rpx;"></image>
+    </view>
+    <view class='cuIcon-cu-image' wx:else>
+      <image src="/images/tabbar/home{{PageCur=='dance'?'_cur':''}}.png" style="padding:4rpx;"></image>
+    </view>
+    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">首页</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="info" wx:if="{{pageConfig.comment === 'true'}}">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/quan{{PageCur=='info'?'_cur':''}}.png" style="padding:8rpx;"></image>
+    </view>
+    <view class="{{PageCur=='info'?'text-green':'text-gray'}}">舞圈</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="message">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/message{{PageCur=='message'?'_cur':''}}.png" style="padding:4rpx;"></image>
+    </view>
+    <view class="{{PageCur=='message'?'text-green':'text-gray'}}">消息</view>
+    <view class="cu-tag badge" wx:if="{{unreadMsgAmount > 0}}">
+      {{unreadMsgAmount > 99 ? '99+' : unreadMsgAmount}}
+    </view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="profile">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/about{{PageCur=='profile'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='profile'?'text-green':'text-gray'}}">我</view>
+  </view>
+</view>

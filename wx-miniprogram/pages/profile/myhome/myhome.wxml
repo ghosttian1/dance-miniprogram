@@ -1,0 +1,2 @@
+<!-- 头部 -->
+<profile id="profile" targetUserId="{{targetUserId}}" isBack="{{false}}"></profile>

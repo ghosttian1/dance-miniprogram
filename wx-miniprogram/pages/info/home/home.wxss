@@ -1,0 +1,88 @@
+/* pages/dancer/home/home.wxss */
+.cu-custom{
+    min-height: 60px;
+    height: 84px;
+}
+.cu-custom .cu-bar{
+    min-height: 60px;
+    height: 84px;
+}
+
+.top-tab{
+    height: 160rpx;
+}
+.tab-inner{
+    right: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    position: fixed;
+}
+.shai  .cu-item{
+    height: 70rpx;
+    line-height: 70rpx;
+}
+.text-content{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+}
+.text2-cut{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    height: 3.2em
+}
+.city{
+    max-width: 250rpx!important;
+}
+/* 头像大小 */
+.cu-item .cu-avatar{
+    width: 80rpx;
+    height: 80rpx;
+}
+.cu-list.menu-avatar>.cu-item .content {
+    left: 130rpx;
+}
+
+.publish{
+    position: fixed;
+    right: 20rpx;
+    bottom: 200rpx;
+    width: 100rpx;
+    width: 100rpx;
+}
+.publish text{
+    font-size: 100rpx;
+}
+.pu-main{
+    position: absolute;
+    bottom: 100rpx;
+    width: 100vw;
+    left: 0;
+    color: var(--white);
+}
+.pu-main .pu-item{
+    display: inline-block;
+}
+.pu-main .pu-item.disabled{
+    opacity: 0.6;
+    color: var(--white);
+}
+.pu-main text{
+    font-size: 100rpx;
+}
+.pu-main .pu-close{
+    margin: 50rpx 0;
+    font-size: 60rpx;
+}
+.no-data{
+    text-align: center;
+    padding-top: 20vh;
+}
+.pu-item image{
+    width: 70rpx;
+    height: 70rpx;
+}

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "dance": "/pages/dance/home/home",
+    "info": "/pages/info/home/home",
+    "message": "/pages/message/home/home",
+    "profile": "/pages/profile/home/home"
+  },
+  "navigationBarTextStyle": "black"
+}

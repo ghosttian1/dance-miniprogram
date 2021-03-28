@@ -1,0 +1,35 @@
+.zuo{
+    height: 100rpx;
+    /* border-bottom: 1rpx solid #ddd; */
+}
+.nei .col-3 > view{
+    background-color: var(--ghostWhite);
+}
+.cu-list.grid.btn-wrapper{
+    padding: 0;
+    /* background-color: var(--ghostWhite); */
+}
+button.cu-item{
+    line-height: normal;
+    background: none;
+}
+
+.nav .cu-item.cur{
+    border: none;
+}
+.item{
+    width: 140rpx;
+    margin: auto;
+    position: relative;
+}
+.cur .item::after{
+    position: absolute;
+    content: ' ';
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 80rpx;
+    margin: auto;
+    height: 90%;
+    border-bottom: 2px solid var(--orange);
+}

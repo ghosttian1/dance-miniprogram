@@ -1,0 +1,27 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --fix app.js api.js components pages utils"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yjua/wx-miniprogram.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yjua/wx-miniprogram/issues"
+  },
+  "homepage": "https://github.com/yjua/wx-miniprogram#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0"
+  },
+  "dependencies": {
+    "eslint": "^7.5.0",
+    "save-dev": "0.0.1-security"
+  }
+}

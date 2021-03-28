@@ -1,0 +1,150 @@
+.video-swiper{width:100%;height:100%}
+.video_item{height:100%;width:100%}
+.play-btn{
+  width: 160rpx;
+  height: 160rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 50%;
+  font-size: 160rpx;
+}
+.video-swiper {
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}
+.container {
+  width: 100%;
+  /* height: calc(100vh - 100rpx  - env(safe-area-inset-bottom) / 2); */
+  height: calc(100vh - 100rpx);
+  position: relative;
+  background-color: #000;
+}
+/* 头部 */
+.header-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 200;
+}
+.header-container .nav .cu-item{
+  font-size: 36rpx;
+  padding: 0 20rpx;
+  margin: 0 10rpx;
+  position: relative;
+}
+.header-container .nav .cu-item.cur{
+  border: none;
+  position: relative;
+}
+.header-container .nav .cur::after{
+  border-bottom: 6rpx solid #fff;
+  position: absolute;
+  content: ' ';
+  width: 50rpx;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 10rpx;
+}
+.header-container .cu-tag.badge{
+  top: 16rpx;
+}
+/* icon */
+.cuIcon-weixin{
+  font-size: 80rpx;
+  color:#40b34f;
+  /* color:#20c064; */
+}
+.cuIcon-likefill{
+  font-size: 70rpx;
+}
+
+/* 头像内容 */
+.box{
+  position: absolute;
+  left: 20rpx;
+  bottom: 100rpx;
+  width: 70vw;
+  color: #fff;
+  z-index: 100;
+}
+.box .cu-avatar{
+  display: inline-block;
+  width: 80rpx;
+  height: 80rpx;
+}
+.box .nickname{
+  display: inline-block;
+  font-size: 30rpx;
+  max-width: 230rpx;
+  overflow: hidden;
+  max-height: 1.6em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.box .content{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  max-height: 3.2em;
+  overflow: hidden;
+  font-size: 30rpx;
+}
+
+/* 右侧按钮和分享等 */
+.btn-box{
+  z-index: 100;
+  position: absolute;
+  right: 20rpx;
+  bottom: 100rpx;
+  color: #fff;
+}
+.btn-box .btn{
+  width: 100rpx;
+  margin-top: 60rpx;
+  display: inline-block;
+  position: relative;
+}
+
+.share-btn{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+.share-tip{
+  position: fixed;
+  right: 10rpx;
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 10px;
+  padding: 20rpx 30rpx;
+  z-index: 100;
+  color: #fff;
+  top: 140rpx;
+}
+.share-tip:after{
+  position: absolute;
+  top:-36rpx;
+  right: 120rpx;
+  content: ' ';
+  width: 0; 
+  height: 0;
+  border-width: 20rpx;
+  border-style: solid;
+  border-color:transparent transparent #000 transparent;
+}
+
+.no-data{
+  color: #fff;
+  text-align: center;
+  margin-top: 20vh;
+}

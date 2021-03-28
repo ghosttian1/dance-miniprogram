@@ -1,0 +1,35 @@
+/* pages/info/detail/detail.wxss */
+page{
+    background-color: #fff;
+}
+/* 头像大小 */
+.cu-item .cu-avatar{
+    width: 80rpx;
+    height: 80rpx;
+}
+.cu-list.menu-avatar>.cu-item .content {
+    left: 130rpx;
+}
+.page-bottom,
+.fixed-bottom{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 150rpx;
+    line-height: 150rpx;
+    text-align: center;
+}
+.page-bottom button{
+    width: 380rpx;
+    vertical-align: middle;
+}
+.fixed-bottom button{
+    width: 240rpx;
+}
+.pl{
+    height: 200rpx;
+}
+.text-content{
+    padding: 0 30rpx;
+}

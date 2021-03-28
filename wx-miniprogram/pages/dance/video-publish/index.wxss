@@ -1,0 +1,71 @@
+/* pages/dance/video-publish/index.wxss */
+page{
+    background-color: #fff;
+}
+.add-btn .icon{
+    font-size: 200rpx;
+}
+
+.intro{
+    background-color: var(--white);
+    padding: 1rpx 30rpx;
+    border-bottom: 1rpx solid #eee;
+    position: relative;
+    margin-top: 100rpx;
+}
+.intro .title{
+    padding: 20rpx 0;
+    font-size: 30rpx;
+}
+.intro input{
+    font-size: 40rpx;
+    padding: 20rpx;
+    padding-right: 40rpx;
+    height: initial;
+}
+.intro textarea{
+    height: 140rpx;
+    font-size: 40rpx;
+    padding-right: 40rpx;
+    padding-left: 20rpx;
+    margin-bottom: 20rpx;
+}
+.tag{
+    margin-top: 10px;
+    min-height: 30px;
+    padding: 0 20px;
+}
+.nums{
+    position: absolute;
+    right: 20rpx;
+    bottom: 6rpx;
+}
+/* 发布按钮 */
+.publish{
+    position: fixed;
+    bottom: 60rpx;
+    width: 80vw;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+/* check  */
+checkbox-group{
+    display: inline-block;
+}
+
+/* 未选中的 背景样式 */
+checkbox .wx-checkbox-input{
+    width: 32rpx; /* 背景的宽 */
+    height: 32rpx; /* 背景的高 */
+}
+
+.select{
+    vertical-align: text-bottom;
+}
+.select::before{
+    right: 2rpx;
+}
+navigator{
+    display: inline-block;
+}

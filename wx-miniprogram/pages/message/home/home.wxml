@@ -1,0 +1,29 @@
+  <!-- 头部 -->
+  <cu-custom bgColor="bg-white">
+    <view slot="content">消息</view>
+  </cu-custom>
+  <view class="cu-list menu-avatar">
+    <block wx:if="{{list.length > 0}}">
+        <navigator open-type="navigate" hover-class='none' url="/pages/message/chat/chat?targetUserId={{item.targetUserId}}" class="cu-item" wx:for="{{list}}" wx:key="index">
+          <view class="cu-avatar round lg" style="background-image:url({{item.dialogIcon}});"></view>
+          <view class="content">
+            <view class="text-solid">{{item.dialogName}}</view>
+            <view class="text-gray text-sm margin-top-sm">
+              <text class="text-cut">{{item.dialogContent}}</text>
+            </view>
+          </view>
+          <view class="action">
+            <view class="text-grey text-xs">{{item.lastActionTimeText}}</view>
+            <view class="cu-tag round bg-red sm" wx:if="{{item.unreadAmount > 0}}">
+              {{item.unreadAmount > 99 ? '99+' : item.unreadAmount}}
+            </view>
+          </view>
+        </navigator>
+    </block>
+    <view class="no-data text-gray margin-top-lg text-center" style="margin-top: 20vh" wx:else>
+      暂无内容
+    </view>
+  </view>
+
+<!-- 底部占位符 -->
+<view class='cu-tabbar-height' />

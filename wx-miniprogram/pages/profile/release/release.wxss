@@ -1,0 +1,52 @@
+/* pages/profile/release/release.wxss */
+
+.main{
+    height: calc(100vh - 120rpx - 90rpx);
+}
+.main.not{
+    height: calc(100vh - 120rpx - 90rpx - 62rpx);
+}
+.notice{
+    padding-left: 20rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+}
+.close{
+    display: inline-block;
+    width: 60rpx;
+    text-align: center;
+}
+.item{
+    display: flex;
+    /* height: 140rpx; */
+    background-color: var(--white);
+    position: relative;
+    transition: all .1s ease-in-out 0s;
+    transform: translateX(0rpx);
+    padding: 20rpx 40rpx;  
+    box-sizing: border-box;  
+}
+.item .content{
+    width: 100%;
+}
+.item .move{
+    position: absolute;
+    right: 0;
+    top:0;
+    width: 130rpx;
+    display: flex;
+    height: 100%;
+    transform: translateX(100%);
+    align-items: center;
+}
+.item .move view{
+    margin: auto;
+}
+.item.move-cur{
+    transform: translateX(-130rpx);
+}
+    
+.no-data{
+    text-align: center;
+    margin-top: 20vh;
+}

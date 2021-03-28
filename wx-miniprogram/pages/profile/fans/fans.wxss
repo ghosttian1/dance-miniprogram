@@ -1,0 +1,21 @@
+/* pages/profile/fans/fans.wxss */
+.page {
+    height: 100Vh;
+    width: 100vw;
+}
+.cu-list{
+    position: relative;
+}
+.item{
+    width: 100vw;
+    background-color: #fff;
+    padding: 20rpx;
+}
+.content{
+    padding: 0 20rpx 0 30rpx;
+    overflow: hidden;
+    
+}
+.text-none{
+    height: calc(100vh - 120rpx);
+}

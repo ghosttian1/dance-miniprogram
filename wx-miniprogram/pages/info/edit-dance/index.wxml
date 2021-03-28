@@ -1,0 +1,73 @@
+<!-- 头部 -->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="content">找舞伴</view>
+</cu-custom>
+<form>
+	<view class="cu-form-group">
+		<view class="title">性别</view>
+		<picker bindchange="pickerChange" value="{{pickValue.gender}}" range="{{picker.gender}}" data-type="gender" range-key="text">
+			<view class="picker {{obj.gender ? 'text-black' : 'text-gray'}}">
+				{{obj.gender?picker.gender[pickValue.gender].text:'填写男女'}}
+			</view>
+		</picker>
+	</view>
+	<view class="cu-form-group">
+		<view class="title">身高(cm)</view>
+		<picker bindchange="pickerChange" value="{{pickValue.height}}" range="{{picker.height}}" data-type="height">
+			<view class="picker {{obj.height ? 'text-black' : 'text-gray'}}">
+				{{obj.height?picker.height[pickValue.height]:'80-190'}}
+			</view>
+		</picker>
+	</view>
+	<view class="cu-form-group">
+		<view class="title">年龄</view>
+		<input placeholder="填写年龄" type="number" style="text-align:right;" placeholder-class="place-holder" bindinput="getAge" value="{{obj.age}}"></input>
+	</view>
+	<view class="cu-form-group">
+		<view class="title">城市</view>
+		<picker mode="multiSelector" bindchange="bindCityPickerChange" bindcolumnchange="bindCityColumnChange" range="{{cityList}}" range-key="name" value="{{pickValue.city}}">
+			<view class="picker {{cityShow ? 'text-black' : 'text-gray'}}">
+				{{ cityShow ? cityShow :'所在城市'}}
+			</view>
+		</picker>
+	</view>
+
+	<view class="cu-form-group">
+		<view class="title">专业</view>
+		<picker bindchange="pickerChange" value="{{pickValue.majorId}}" range="{{picker.majorId}}" range-key="text" data-type="majorId">
+			<view class="picker {{obj.majorId ? 'text-black' : 'text-gray'}}">
+				{{obj.majorId?picker.majorId[pickValue.majorId].text:'拉丁/摩登/十项全能'}}
+			</view>
+		</picker>
+	</view>
+	<view class="cu-form-group">
+		<view class="title">水平</view>
+		<picker bindchange="pickerChange" value="{{pickValue.levelId}}" range="{{picker.levelId}}" range-key="text" data-type="levelId">
+			<view class="picker {{obj.levelId ? 'text-black' : 'text-gray'}}">
+				{{obj.levelId?picker.levelId[pickValue.levelId].text:'专业/业余'}}
+			</view>
+		</picker>
+	</view>
+	<view class="cu-form-group">
+		<view class="title">舞龄(年)</view>
+		<picker bindchange="pickerChange" value="{{pickValue.danceAge}}" range="{{picker.danceAge}}" data-type="danceAge">
+			<view class="picker {{obj.danceAge ? 'text-black' : 'text-gray'}}">
+				{{obj.danceAge?picker.danceAge[pickValue.danceAge]:'1-20+'}}
+			</view>
+		</picker>
+	</view>
+    <view class="cu-form-group">
+		<view class="title">学习院校/培训班</view>
+		<input placeholder="学校或者培训机构" bindblur="trainingBlur" class="text-right" placeholder-class="place-holder" value="{{obj.training}}"></input>
+	</view>
+	<view class="intro">
+		<view class="title">介绍你自己和找舞伴要求</view>
+		<textarea maxlength="300" value="{{obj.comment}}" placeholder-class="place-holder" bindblur="commentBlur" bindinput="textareaAInput" placeholder="来吧，尽情发挥吧"></textarea>
+        <text class="text-gray nums">{{areaLen}}/300</text>
+	</view>
+</form>
+
+
+<view class="padding-lg">
+	<button class="cu-btn block bg-green margin-tb-sm lg" bindtap="publish"> {{isEdit ? '保 存' : '发 布'}}</button>
+</view>

@@ -1,0 +1,23 @@
+/* pages/profile/user/edit.wxss */
+page{
+    background-color: var(--white);
+}
+textarea{
+    height: 400rpx;
+}
+.nums{
+    display: block;
+    width: 100%;
+    text-align: right;
+}
+.bottom-btn{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 30rpx 0;
+    text-align: center;
+}
+.bottom-btn .cu-btn{
+    width: 380rpx;
+}
